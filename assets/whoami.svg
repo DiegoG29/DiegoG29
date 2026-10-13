@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="330" viewBox="0 0 960 330" role="img" aria-label="Terminal whoami de DiegoG29">
+  <rect width="960" height="330" rx="12" fill="#0d1117" stroke="#30363d"/>
+  <rect width="960" height="36" rx="12" fill="#161b22"/>
+  <rect y="24" width="960" height="12" fill="#161b22"/>
+  <circle cx="24" cy="18" r="6" fill="#ff5f57"/>
+  <circle cx="44" cy="18" r="6" fill="#febc2e"/>
+  <circle cx="64" cy="18" r="6" fill="#28c840"/>
+  <text x="480" y="23" text-anchor="middle" font-family="Consolas,monospace" font-size="13" fill="#7d8590">diego@dev: ~</text>
+  <g font-family="'JetBrains Mono','Fira Code',Consolas,monospace" font-size="16">
+    <text x="28" y="72"><tspan fill="#3fb950">diego@dev</tspan><tspan fill="#7d8590">:</tspan><tspan fill="#39c5cf">~</tspan><tspan fill="#e6edf3">$ whoami --verbose</tspan></text>
+    <text x="28" y="108" fill="#e6edf3"><tspan fill="#d2a8ff">user</tspan>      : DiegoG29</text>
+    <text x="28" y="136" fill="#e6edf3"><tspan fill="#d2a8ff">role</tspan>      : Full Stack Developer</text>
+    <text x="28" y="164" fill="#e6edf3"><tspan fill="#d2a8ff">frontend</tspan>  : React · Next.js · TypeScript</text>
+    <text x="28" y="192" fill="#e6edf3"><tspan fill="#d2a8ff">backend</tspan>   : Node.js · Express · REST APIs</text>
+    <text x="28" y="220" fill="#e6edf3"><tspan fill="#d2a8ff">focus</tspan>     : apps web completas, de la UI a la base de datos</text>
+    <text x="28" y="248" fill="#e6edf3"><tspan fill="#d2a8ff">status</tspan>    : <tspan fill="#3fb950">● aprendiendo y construyendo</tspan></text>
+    <text x="28" y="292"><tspan fill="#3fb950">diego@dev</tspan><tspan fill="#7d8590">:</tspan><tspan fill="#39c5cf">~</tspan><tspan fill="#e6edf3">$ </tspan></text>
+    <rect x="118" y="278" width="10" height="18" fill="#3fb950">
+      <animate attributeName="opacity" values="1;0;1" dur="1.1s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+</svg>
