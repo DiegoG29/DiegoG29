@@ -10,9 +10,9 @@
     <text x="28" y="72"><tspan fill="#3fb950">diego@dev</tspan><tspan fill="#7d8590">:</tspan><tspan fill="#39c5cf">~</tspan><tspan fill="#e6edf3">$ whoami --verbose</tspan></text>
     <text x="28" y="108" fill="#e6edf3"><tspan fill="#d2a8ff">user</tspan>      : DiegoG29</text>
     <text x="28" y="136" fill="#e6edf3"><tspan fill="#d2a8ff">role</tspan>      : Full Stack Developer</text>
-    <text x="28" y="164" fill="#e6edf3"><tspan fill="#d2a8ff">frontend</tspan>  : React · Next.js · TypeScript</text>
-    <text x="28" y="192" fill="#e6edf3"><tspan fill="#d2a8ff">backend</tspan>   : Node.js · Express · REST APIs</text>
-    <text x="28" y="220" fill="#e6edf3"><tspan fill="#d2a8ff">focus</tspan>     : apps web completas, de la UI a la base de datos</text>
+    <text x="28" y="164" fill="#e6edf3"><tspan fill="#d2a8ff">frontend</tspan>  : Blade · React · Next.js · TypeScript</text>
+    <text x="28" y="192" fill="#e6edf3"><tspan fill="#d2a8ff">backend</tspan>   : PHP · Laravel · Node.js · Python</text>
+    <text x="28" y="220" fill="#e6edf3"><tspan fill="#d2a8ff">database</tspan>  : PostgreSQL</text>
     <text x="28" y="248" fill="#e6edf3"><tspan fill="#d2a8ff">status</tspan>    : <tspan fill="#3fb950">● aprendiendo y construyendo</tspan></text>
     <text x="28" y="292"><tspan fill="#3fb950">diego@dev</tspan><tspan fill="#7d8590">:</tspan><tspan fill="#39c5cf">~</tspan><tspan fill="#e6edf3">$ </tspan></text>
     <rect x="118" y="278" width="10" height="18" fill="#3fb950">

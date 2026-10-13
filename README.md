@@ -11,7 +11,7 @@
 <br>
 
 <a href="https://github.com/DiegoG29">
-  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&amp;weight=700&amp;size=24&amp;duration=2600&amp;pause=900&amp;color=3FB950&amp;center=true&amp;vCenter=true&amp;width=900&amp;lines=DiegoG29+%E2%80%94+Full+Stack+Developer;React+%E2%80%A2+Next.js+%E2%80%A2+TypeScript;Node.js+%E2%80%A2+Express+%E2%80%A2+REST+APIs;Del+frontend+a+la+base+de+datos" alt="Texto animado">
+  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&amp;weight=700&amp;size=24&amp;duration=2600&amp;pause=900&amp;color=3FB950&amp;center=true&amp;vCenter=true&amp;width=900&amp;lines=DiegoG29+%E2%80%94+Full+Stack+Developer;PHP+%E2%80%A2+Laravel+%E2%80%A2+Blade;React+%E2%80%A2+Node.js+%E2%80%A2+Python+%E2%80%A2+PostgreSQL;Del+frontend+a+la+base+de+datos" alt="Texto animado">
 </a>
 
 <img src="https://komarev.com/ghpvc/?username=DiegoG29&style=flat&color=3fb950&label=profile+views" alt="profile views">
@@ -41,22 +41,28 @@
   <tbody>
     <tr>
       <td width="50%" valign="top"><code>├─ ✦ languages:</code><br><br>
-        <img src="https://skillicons.dev/icons?i=js,ts,html,css" alt="JavaScript, TypeScript, HTML y CSS"><br>
-        <sub><code>JavaScript · TypeScript · HTML · CSS</code></sub>
+        <img src="https://skillicons.dev/icons?i=php,js,ts,py,html,css" alt="PHP, JavaScript, TypeScript, Python, HTML y CSS"><br>
+        <sub><code>PHP · JavaScript · TypeScript · Python · HTML · CSS</code></sub>
       </td>
       <td width="50%" valign="top"><code>├─ ◧ frontend:</code><br><br>
-        <img src="https://skillicons.dev/icons?i=react,nextjs,tailwind,vite" alt="React, Next.js, Tailwind y Vite"><br>
-        <sub><code>React · Next.js · Tailwind CSS · Vite</code></sub>
+        <img src="https://skillicons.dev/icons?i=laravel,react,nextjs" alt="Blade (Laravel), React y Next.js"><br>
+        <sub><code>Blade · React · Next.js</code></sub>
       </td>
     </tr>
     <tr>
       <td valign="top"><code>├─ ⚙ backend:</code><br><br>
-        <img src="https://skillicons.dev/icons?i=nodejs,express" alt="Node.js y Express"><br>
-        <sub><code>Node.js · Express · REST APIs</code></sub>
+        <img src="https://skillicons.dev/icons?i=laravel,nodejs,py" alt="Laravel, Node.js y Python"><br>
+        <sub><code>Laravel · Node.js · Python</code></sub>
       </td>
-      <td valign="top"><code>╰─ ⌁ tools:</code><br><br>
-        <img src="https://skillicons.dev/icons?i=git,github,vscode,npm" alt="Git, GitHub, VS Code y npm"><br>
-        <sub><code>Git · GitHub · VS Code · npm</code></sub>
+      <td valign="top"><code>├─ ▣ database:</code><br><br>
+        <img src="https://skillicons.dev/icons?i=postgres" alt="PostgreSQL"><br>
+        <sub><code>PostgreSQL</code></sub>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" valign="top"><code>╰─ ⌁ tools:</code><br><br>
+        <img src="https://skillicons.dev/icons?i=git,github,vscode" alt="Git, GitHub y VS Code"><br>
+        <sub><code>Git · GitHub · VS Code · Composer · npm</code></sub>
       </td>
     </tr>
   </tbody>
