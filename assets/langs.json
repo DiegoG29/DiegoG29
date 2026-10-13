@@ -1,0 +1,10 @@
+{
+  "title": "Language Stack",
+  "axes": [
+    { "label": "PHP", "value": 88 },
+    { "label": "JavaScript", "value": 82 },
+    { "label": "TypeScript", "value": 72 },
+    { "label": "Python", "value": 68 },
+    { "label": "SQL", "value": 80 }
+  ]
+}

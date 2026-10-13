@@ -1,4 +1,4 @@
-// Genera assets/banner-{dark,light}.svg: ventana vim con elefante punteado (dither FS) + profile.yml
+// Genera assets/banner-{dark,light}.svg: ventana vim con elefante PostgreSQL punteado (dither FS) + profile.yml
 const fs = require('fs');
 const path = require('path');
 // Uso: node scripts/gen-banner.js  (escribe en assets/)
@@ -16,63 +16,58 @@ const themes = {
 const MONO = "ui-monospace,SFMono-Regular,'JetBrains Mono',Consolas,monospace";
 const esc = s => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 
-// ---------- elefante: formas -> escala de grises -> Floyd-Steinberg serpentina ----------
-const W = 300, H = 340;
+// ---------- elefante de PostgreSQL: PNG -> escala de grises -> Floyd-Steinberg serpentina ----------
+// Fuente: assets/source/postgres-elephant.png (300x340, fondo magenta = transparente)
+const zlib = require('zlib');
+const SOURCE = path.join(__dirname, '..', 'assets', 'source', 'postgres-elephant.png');
 
-const ellipse = (cx, cy, rx, ry) => (x, y) => ((x - cx) / rx) ** 2 + ((y - cy) / ry) ** 2 <= 1;
-const rrect = (x0, y0, x1, y1, r) => (x, y) => {
-  if (x < x0 || x > x1 || y < y0 || y > y1) return false;
-  const cx = Math.min(Math.max(x, x0 + r), x1 - r), cy = Math.min(Math.max(y, y0 + r), y1 - r);
-  return (x - cx) ** 2 + (y - cy) ** 2 <= r * r;
-};
-// trompa: circulos a lo largo de una bezier cubica, radio decreciente
-const bezierTube = (p0, p1, p2, p3, r0, r1) => {
-  const pts = [];
-  for (let i = 0; i <= 60; i++) {
-    const t = i / 60, u = 1 - t;
-    const x = u ** 3 * p0[0] + 3 * u * u * t * p1[0] + 3 * u * t * t * p2[0] + t ** 3 * p3[0];
-    const y = u ** 3 * p0[1] + 3 * u * u * t * p1[1] + 3 * u * t * t * p2[1] + t ** 3 * p3[1];
-    pts.push([x, y, r0 + (r1 - r0) * t]);
+// decodificador PNG minimo: 8 bits, RGB o RGBA, sin entrelazado
+function readPng(file) {
+  const buf = fs.readFileSync(file);
+  let pos = 8, width, height, channels, idat = [];
+  while (pos < buf.length) {
+    const len = buf.readUInt32BE(pos), type = buf.toString('ascii', pos + 4, pos + 8);
+    const data = buf.subarray(pos + 8, pos + 8 + len);
+    if (type === 'IHDR') {
+      width = data.readUInt32BE(0); height = data.readUInt32BE(4);
+      channels = { 2: 3, 6: 4 }[data[9]];
+      if (data[8] !== 8 || !channels || data[12] !== 0) throw new Error('PNG no soportado');
+    } else if (type === 'IDAT') idat.push(data);
+    else if (type === 'IEND') break;
+    pos += 12 + len;
   }
-  return (x, y) => pts.some(([px, py, r]) => (x - px) ** 2 + (y - py) ** 2 <= r * r);
-};
-
-// capas en orden z (la ultima queda encima); fill = brillo del relleno
-const layers = [
-  { f: bezierTube([62, 170], [40, 185], [38, 215], [30, 228], 3, 2), fill: 0.6 },       // cola
-  { f: rrect(78, 215, 112, 302, 12), fill: 0.04 },                                    // pata trasera atras
-  { f: rrect(168, 215, 202, 302, 12), fill: 0.04 },                                   // pata delantera atras
-  { f: ellipse(140, 190, 92, 68), fill: 0.07 },                                       // cuerpo
-  { f: rrect(100, 222, 136, 306, 12), fill: 0.07 },                                   // pata trasera
-  { f: rrect(188, 222, 224, 306, 12), fill: 0.07 },                                   // pata delantera
-  { f: ellipse(222, 140, 52, 50), fill: 0.08 },                                       // cabeza
-  { f: bezierTube([248, 160], [278, 195], [262, 250], [282, 272], 17, 8), fill: 0.08 }, // trompa
-  { f: ellipse(196, 146, 36, 46), fill: 0.12 },                                       // oreja
-  { f: bezierTube([238, 176], [246, 192], [256, 196], [266, 192], 4, 2), fill: 0.95 },  // colmillo
-  { f: ellipse(238, 128, 6, 7), fill: 0 },                                          // ojo
-];
-
-function grayscale() {
-  const top = new Int8Array(W * H).fill(-1);
-  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++)
-    for (let i = layers.length - 1; i >= 0; i--) if (layers[i].f(x, y)) { top[y * W + x] = i; break; }
-
-  const g = new Float32Array(W * H);
-  const R = 2;
-  for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
-    const k = top[y * W + x];
-    if (k < 0) continue;
-    // borde: algun vecino cercano pertenece a una capa inferior (o a ninguna)
-    let edge = false;
-    for (let dy = -R; dy <= R && !edge; dy++) for (let dx = -R; dx <= R; dx++) {
-      if (dx * dx + dy * dy > R * R) continue;
-      const nx = x + dx, ny = y + dy;
-      const n = nx < 0 || ny < 0 || nx >= W || ny >= H ? -1 : top[ny * W + nx];
-      if (n < k) { edge = true; break; }
+  const raw = zlib.inflateSync(Buffer.concat(idat));
+  const stride = width * channels, px = Buffer.alloc(height * stride);
+  for (let y = 0; y < height; y++) {
+    const f = raw[y * (stride + 1)], src = y * (stride + 1) + 1, dst = y * stride;
+    for (let i = 0; i < stride; i++) {
+      const a = i >= channels ? px[dst + i - channels] : 0;
+      const b = y > 0 ? px[dst - stride + i] : 0;
+      const c = y > 0 && i >= channels ? px[dst - stride + i - channels] : 0;
+      let v = raw[src + i];
+      if (f === 1) v += a;
+      else if (f === 2) v += b;
+      else if (f === 3) v += (a + b) >> 1;
+      else if (f === 4) { const p = a + b - c, pa = Math.abs(p - a), pb = Math.abs(p - b), pc = Math.abs(p - c);
+        v += pa <= pb && pa <= pc ? a : pb <= pc ? b : c; }
+      px[dst + i] = v & 255;
     }
-    // sombreado suave: mas luz arriba a la izquierda
-    const shade = 0.05 * (1 - y / H) + 0.03 * (1 - x / W);
-    g[y * W + x] = edge ? 0.6 : Math.min(1, layers[k].fill + shade);
+  }
+  return { width, height, channels, px };
+}
+
+const img = readPng(SOURCE);
+const W = img.width, H = img.height;
+
+// tono por color: lineas blancas y contorno negro densos, relleno azul disperso, magenta vacio
+function grayscale() {
+  const g = new Float32Array(W * H);
+  for (let i = 0; i < W * H; i++) {
+    const r = img.px[i * img.channels], gr = img.px[i * img.channels + 1], b = img.px[i * img.channels + 2];
+    if (r > 180 && b > 180 && gr < 110) g[i] = 0;          // fondo
+    else if (r > 200 && gr > 200 && b > 200) g[i] = 0.5;   // lineas blancas
+    else if (r < 70 && gr < 70 && b < 70) g[i] = 0.2;      // contorno negro
+    else g[i] = 0.05 + 0.04 * (1 - (i / W) / H);           // relleno azul
   }
   return g;
 }
@@ -146,7 +141,7 @@ function banner(name) {
   const n = yml.length;
   return `<svg xmlns="http://www.w3.org/2000/svg" width="1180" height="610" viewBox="0 0 1180 610" role="img" aria-labelledby="title desc">` +
   `<title id="title">DiegoG29 — Full Stack Developer</title>` +
-  `<desc id="desc">Perfil en terminal tipo vim con un elefante punteado y profile.yml.</desc>` +
+  `<desc id="desc">Perfil en terminal tipo vim con el elefante de PostgreSQL punteado y profile.yml.</desc>` +
   `<rect width="1180" height="610" rx="18" fill="${t.bg}"/>` +
   `<rect x="13" y="13" width="1154" height="584" rx="13" fill="${t.win}" stroke="${t.line}"/>` +
   `<path d="M13 62H1167" stroke="${t.line}"/>` +

@@ -23,7 +23,7 @@
 ## `$ whoami`
 
 <p align="center">
-  <img src="assets/whoami.svg" width="960" alt="Terminal con el perfil de DiegoG29, Full Stack Developer">
+  <img src="assets/whoami.svg" width="960" alt="Profile shell de DiegoG29: whoami, expertise y capas full stack">
 </p>
 
 <br>
@@ -74,6 +74,25 @@
 </table>
 
 </div>
+
+---
+
+## `$ php artisan signals:show --all`
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/radar-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="assets/radar-light.svg">
+    <img src="assets/radar-dark.svg" width="440" alt="Radar de habilidades full stack">
+  </picture>&nbsp;
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/radar-langs-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="assets/radar-langs-light.svg">
+    <img src="assets/radar-langs-dark.svg" width="440" alt="Radar de lenguajes">
+  </picture>
+</p>
+
+<p align="center"><sub><code>signals: fullstack_skill_radar · language_stack_radar · status: healthy</code></sub></p>
 
 ---
 

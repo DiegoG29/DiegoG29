@@ -1,0 +1,11 @@
+{
+  "title": "Full Stack Skill Radar",
+  "axes": [
+    { "label": "Backend (Laravel)", "value": 85 },
+    { "label": "Frontend (Blade/React)", "value": 80 },
+    { "label": "Bases de datos (PostgreSQL)", "value": 78 },
+    { "label": "APIs REST", "value": 82 },
+    { "label": "Git & GitHub", "value": 80 },
+    { "label": "Deploy & Linux", "value": 65 }
+  ]
+}
